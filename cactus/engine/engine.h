@@ -89,7 +89,7 @@ struct Config {
     float max_pixels_tolerance = 2.0f;
     bool do_image_splitting = true;
 
-    enum class ModelType {QWEN = 0, GEMMA = 1, SMOL = 2, NOMIC = 3, LFM2 = 5, SIGLIP2 = 6, WHISPER = 7};
+    enum class ModelType {QWEN = 0, GEMMA = 1, SMOL = 2, NOMIC = 3, LFM2 = 5, SIGLIP2 = 6, WHISPER = 7, TROCR = 8};
     ModelType model_type = ModelType::QWEN;
 
     enum class ModelVariant {DEFAULT = 0, VLM = 1, EXTRACT = 2, RAG = 3};
@@ -110,6 +110,18 @@ struct Config {
 
     std::vector<std::string> layer_types;
     size_t conv_L_cache = 0;
+
+    // TrOCR-specific configuration
+    uint32_t encoder_num_layers = 12;
+    uint32_t encoder_hidden_dim = 768;
+    uint32_t encoder_attention_heads = 12;
+    uint32_t encoder_intermediate_dim = 3072;
+    uint32_t decoder_num_layers = 12;
+    uint32_t decoder_hidden_dim = 768;
+    uint32_t decoder_attention_heads = 12;
+    uint32_t decoder_intermediate_dim = 3072;
+    uint32_t trocr_image_size = 384;
+    uint32_t trocr_patch_size = 16;
 
     bool from_json(const std::string& json_path);
     std::string to_json() const;
