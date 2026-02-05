@@ -113,9 +113,11 @@ bool Model::init_internal(CactusGraph* gb, const std::string& model_folder, size
 
     graph_handle_ = gb;
 
-    if(config_.model_type == Config::ModelType::WHISPER || config_.model_type == Config::ModelType::TROCR){
-        embedding_file_path_ = model_folder+"/decoder_token_embeddings.weights";
+if(config_.model_type == Config::ModelType::WHISPER){        embedding_file_path_ = model_folder+"/decoder_token_embeddings.weights";
     }
+          else if(config_.model_type == Config::ModelType::TROCR){
+                      embedding_file_path_ = model_folder_+"/decoder_token_embeddings.weights";
+          }
     else{
         embedding_file_path_ = model_folder + "/token_embeddings.weights";
     }
