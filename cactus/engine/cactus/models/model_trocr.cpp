@@ -254,8 +254,7 @@ uint32_t Model::decode(const std::vector<uint32_t>& tokens, float temperature, f
             float* src = static_cast<float*>(logits_ptr);
             std::copy(src, src + vocab_size, logits.begin());
         } else if (logits_buf.precision == Precision::FP16) {
-            __fp16* src = static_cast<__fp16*>(logits_ptr);
-            Quantization::fp16_to_fp32(src, logits.data(), vocab_size);
+    __fp16* src = static_cast<__fp16*>(logits_ptr) + row_offset;            Quantization::fp16_to_fp32(src, logits.data(), vocab_size);
         } else {
             int8_t* src = static_cast<int8_t*>(logits_ptr);
             Quantization::int8_to_fp32(src, logits.data(), vocab_size, 1.0f);
